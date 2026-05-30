@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для Даяны 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --rose: #c9717a; --rose-light: #f5dde0; --rose-pale: #fdf1f2;
+    --rose-dark: #8a3d45; --blush: #e8b4b8; --sage: #9cad9a;
+    --cream: #faf6f0; --warm: #f0e6d8; --text: #3a2a2c; --text-muted: #7a5f62;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+  
+  /* PETALS BACKGROUND */
+  .petals-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .petal { position: absolute; width: 12px; height: 16px; border-radius: 50% 0 50% 0; background: var(--blush); opacity: 0.18; animation: fall linear infinite; }
+  @keyframes fall { 0% { transform: translateY(-40px) rotate(0deg); opacity: 0; } 10% { opacity: 0.18; } 90% { opacity: 0.18; } 100% { transform: translateY(110vh) rotate(540deg); opacity: 0; } }
+  
+  section { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 24px; }
+  
+  /* HERO WITH BACKGROUND SLIDER */
+  #hero { position: relative; overflow: hidden; text-align: center; background: #2c2021; }
+  .hero-bg-slider { position: absolute; inset: 0; z-index: 0; opacity: 0.55; }
+  .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease-in-out; }
+  .hero-slide.active { opacity: 1; }
+  
+  .hero-content { position: relative; z-index: 2; max-width: 600px; padding: 20px; }
+  .hero-flower { font-size: 70px; animation: bloom 1.2s ease-out both; display: block; margin-bottom: 16px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); }
+  @keyframes bloom { 0% { transform: scale(0) rotate(-30deg); opacity: 0; } 70% { transform: scale(1.15) rotate(5deg); } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(46px, 11vw, 76px); font-weight: 300; letter-spacing: 0.03em; color: #fff; text-shadow: 0 2px 15px rgba(0,0,0,0.4); line-height: 1.1; animation: fadeUp 1s 0.3s ease-out both; }
+  .hero-sub { font-size: 14px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose-light); margin-top: 20px; text-shadow: 0 1px 8px rgba(0,0,0,0.5); animation: fadeUp 1s 0.6s ease-out both; }
+  .hero-scroll { margin-top: 60px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; opacity: 0.8; cursor: pointer; animation: fadeUp 1s 1s ease-out both; text-decoration: none; }
+  .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, #fff, transparent); animation: scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%, 100% { transform: scaleY(1); opacity: 1; } 50% { transform: scaleY(0.6); opacity: 0.5; } }
+  @keyframes fadeUp { 0% { transform: translateY(24px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+  
+  /* LETTER WITH BLURRED IMAGE BG */
+  #letter { background: #221819; position: relative; overflow: hidden; }
+  .letter-bg-img { position: absolute; inset: 0; background-image: url("ccdr 2025-11-12 180907.546.JPG"); background-size: cover; background-position: center; filter: blur(8px) brightness(0.5); transform: scale(1.05); z-index: 0; }
+  .letter-card { position: relative; z-index: 1; max-width: 560px; width: 100%; background: rgba(255, 255, 255, 0.96); border-radius: 4px; padding: 48px 40px; box-shadow: 0 15px 45px rgba(0,0,0,0.2); backdrop-filter: blur(4px); }
+  .letter-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--rose-light), var(--rose), var(--rose-light)); }
+  .letter-greeting { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-style: italic; font-weight: 300; color: var(--rose-dark); margin-bottom: 24px; }
+  .letter-body { font-size: 16px; line-height: 1.9; font-weight: 300; color: var(--text); white-space: pre-line; }
+  .letter-sig { margin-top: 32px; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-style: italic; color: var(--rose-dark); text-align: right; }
+  .letter-decoration { text-align: center; margin: 20px 0; color: var(--blush); letter-spacing: 12px; font-size: 14px; }
+  
+  /* POLAROID MEMORIES GALLERY */
+  #gallery { background: var(--warm); }
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; max-width: 1100px; width: 100%; padding: 20px; }
+  .polaroid { background: white; padding: 16px 16px 24px 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); transform: rotate(var(--r)); transition: all 0.3s ease; position: relative; display: flex; flex-direction: column; align-items: center; }
+  .polaroid::before { content: ''; position: absolute; top: -12px; left: 35%; width: 30%; height: 24px; background: rgba(245,221,224,0.6); transform: rotate(-2deg); box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+  .polaroid:hover { transform: scale(1.04) rotate(0deg); z-index: 5; box-shadow: 0 15px 35px rgba(139,60,68,0.12); }
+  .polaroid img, .polaroid video { width: 100%; height: 250px; object-fit: cover; border: 1px solid #eee; background: #fafaf8; }
+  .polaroid-caption { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; margin-top: 16px; color: var(--text-muted); text-align: center; }
+
+  /* QUIZ & STUFF */
+  #quiz { background: var(--cream); padding-top: 100px; }
+  .section-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose); margin-bottom: 12px; text-align: center; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 7vw, 54px); font-weight: 300; text-align: center; color: var(--text); margin-bottom: 48px; }
+  .steps-indicator { display: flex; gap: 8px; justify-content: center; margin-bottom: 40px; }
+  .step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rose-light); transition: all 0.3s; cursor: pointer; }
+  .step-dot.active { background: var(--rose); transform: scale(1.4); }
+  .step-dot.done { background: var(--sage); }
+  .quiz-step { display: none; width: 100%; max-width: 720px; }
+  .quiz-step.active { display: block; animation: stepIn 0.4s ease-out; }
+  @keyframes stepIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+  .step-question { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; text-align: center; margin-bottom: 8px; color: var(--text); }
+  .step-hint { font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 32px; font-weight: 300; }
+  
+  .food-section-title { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rose); margin: 24px 0 12px; font-weight: 500; }
+  .food-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-bottom: 12px; }
+  .food-card { background: white; border: 1.5px solid var(--rose-light); border-radius: 12px; padding: 14px 8px 10px; text-align: center; cursor: pointer; transition: all 0.25s; user-select: none; }
+  .food-card:hover { border-color: var(--rose); transform: translateY(-2px); }
+  .food-card.selected { border-color: var(--rose); background: var(--rose-pale); box-shadow: 0 0 0 3px rgba(201,113,122,0.12); }
+  .food-emoji { font-size: 32px; display: block; margin-bottom: 6px; }
+  .food-name { font-size: 13px; font-weight: 400; color: var(--text); }
+  .food-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; font-weight: 300; }
+  
+  .calendar-wrap { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--rose-light); margin-bottom: 24px; }
+  .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .cal-month { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; }
+  .cal-nav { background: none; border: 1px solid var(--rose-light); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 16px; color: var(--rose); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .cal-nav:hover { background: var(--rose-pale); }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-day-name { font-size: 11px; text-align: center; color: var(--text-muted); font-weight: 500; letter-spacing: 0.05em; padding: 4px 0; }
+  .cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 14px; border-radius: 50%; cursor: pointer; transition: all 0.2s; color: var(--text); }
+  .cal-day:hover:not(.empty):not(.past) { background: var(--rose-pale); }
+  .cal-day.selected { background: var(--rose); color: white; }
+  .cal-day.today { border: 1.5px solid var(--rose); color: var(--rose); font-weight: 500; }
+  .cal-day.past { color: #ccc; cursor: default; }
+  .cal-day.empty { cursor: default; }
+  
+  .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+  .time-slot { background: white; border: 1.5px solid var(--rose-light); border-radius: 10px; padding: 12px 8px; text-align: center; cursor: pointer; transition: all 0.25s; font-size: 14px; }
+  .time-slot:hover { border-color: var(--rose); }
+  .time-slot.selected { background: var(--rose-pale); border-color: var(--rose); color: var(--rose-dark); font-weight: 500; }
+  .time-emoji { display: block; font-size: 18px; margin-bottom: 4px; }
+  
+  /* OUTFIT WITH REAL BOY PHOTO */
+  .outfit-stage { display: flex; flex-direction: column; align-items: center; gap: 24px; margin-bottom: 32px; }
+  .photo-frame-guy { width: 190px; height: 270px; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid white; background: #fafaf8; position: relative; }
+  .photo-frame-guy img { width: 100%; height: 100%; object-fit: cover; transition: filter 0.3s; }
+  .outfit-overlay-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.4); color: white; font-size: 12px; text-align: center; padding: 6px 4px; backdrop-filter: blur(2px); }
+
+  .outfit-controls { width: 100%; max-width: 520px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .outfit-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
+  .outfit-options { display: flex; flex-wrap: wrap; gap: 6px; }
+  .outfit-btn { padding: 6px 12px; border: 1.5px solid var(--rose-light); border-radius: 20px; font-size: 12px; cursor: pointer; background: white; color: var(--text); transition: all 0.2s; font-family: 'Jost', sans-serif; }
+  .outfit-btn:hover { border-color: var(--rose); }
+  .outfit-btn.selected { background: var(--rose); border-color: var(--rose); color: white; }
+  .outfit-btn.meme-btn { border-color: #e0c050; background: #fffbe8; color: #7a6010; font-weight: 500; }
+  .outfit-btn.meme-btn:hover { background: #fff3a0; }
+  
+  .vibe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-bottom: 32px; }
+  .vibe-card { background: white; border: 1.5px solid var(--rose-light); border-radius: 12px; padding: 20px 12px; text-align: center; cursor: pointer; transition: all 0.25s; user-select: none; }
+  .vibe-card:hover { transform: translateY(-2px); border-color: var(--rose); }
+  .vibe-card.selected { background: var(--rose-pale); border-color: var(--rose); }
+  .vibe-icon { font-size: 32px; margin-bottom: 8px; }
+  .vibe-name { font-size: 14px; font-weight: 400; color: var(--text); }
+  
+  .comment-box { width: 100%; border: 1.5px solid var(--rose-light); border-radius: 12px; padding: 16px; font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 300; color: var(--text); background: white; resize: none; outline: none; transition: border-color 0.2s; margin-bottom: 24px; }
+  .comment-box:focus { border-color: var(--rose); }
+  
+  .btn-primary { display: block; width: 100%; padding: 16px; background: var(--rose); color: white; border: none; border-radius: 12px; font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 400; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s; text-align: center; text-decoration: none; }
+  .btn-primary:hover { background: var(--rose-dark); transform: translateY(-1px); }
+  .btn-secondary { display: block; width: 100%; padding: 14px; background: transparent; color: var(--text-muted); border: 1px solid var(--rose-light); border-radius: 12px; font-family: 'Jost', sans-serif; font-size: 14px; cursor: pointer; transition: all 0.2s; margin-top: 10px; text-align: center; }
+  .btn-secondary:hover { border-color: var(--rose); color: var(--rose); }
+  
+  #final { background: linear-gradient(160deg, #fdf1f2 0%, var(--warm) 100%); text-align: center; display: none; }
+  #final.show { display: flex; }
+  .final-heart { font-size: 80px; animation: heartbeat 1.5s ease infinite; display: block; }
+  @keyframes heartbeat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.15); } 60% { transform: scale(1.05); } }
+  .final-title { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 300; color: var(--rose-dark); margin: 24px 0 16px; }
+  
+  .final-summary { background: white; border-radius: 16px; padding: 24px; max-width: 480px; width: 100%; border: 1px solid var(--rose-light); margin-top: 24px; text-align: left; box-shadow: 0 10px 30px rgba(139,60,68,0.05); }
+  .summary-row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--rose-light); font-size: 14px; }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-icon { font-size: 20px; flex-shrink: 0; }
+  .summary-label { color: var(--text-muted); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 3px; }
+  .summary-val { color: var(--text); font-weight: 400; }
+  
+  /* MEME MODAL */
+  .meme-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 999; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+  .meme-overlay.show { display: flex; }
+  .meme-box { background: white; border-radius: 20px; padding: 32px 24px; max-width: 340px; width: 90%; text-align: center; animation: popIn 0.3s ease-out; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+  @keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .meme-emoji-big { font-size: 64px; display: block; margin-bottom: 16px; }
+  .meme-text { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--rose-dark); margin-bottom: 8px; }
+  .meme-sub { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+  .meme-close { background: var(--rose); color: white; border: none; border-radius: 10px; padding: 12px 24px; font-family: 'Jost', sans-serif; font-size: 14px; cursor: pointer; width: 100%; transition: background 0.2s; }
+  .meme-close:hover { background: var(--rose-dark); }
+  
+  .tg-status { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 8px; min-height: 18px; font-weight: 500; }
+  @media (max-width: 480px) { .letter-card { padding: 32px 20px; } .food-grid { grid-template-columns: repeat(2, 1fr); } .outfit-controls { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="petals-bg" id="petalsContainer"></div>
+
+<div class="meme-overlay" id="memeOverlay">
+  <div class="meme-box">
+    <span class="meme-emoji-big">🤌😭</span>
+    <p class="meme-text">Любимая, нет.</p>
+    <p class="meme-sub">Белые штаны — это святое.<br>Я знаю, что ты против. Но я всё равно их надену однажды 😅<br><br>А пока — выбери что-то другое 🙏</p>
+    <button class="meme-close" onclick="closeMeme()">Окей, уговорил 😂</button>
+  </div>
+</div>
+
+<section id="hero">
+  <div class="hero-bg-slider" id="heroSlider">
+    <!-- Слайды генерируются скриптом ниже для надежности -->
+  </div>
+  <div class="hero-content">
+    <span class="hero-flower">🌸</span>
+    <h1 class="hero-title">Для Даяны</h1>
+    <p class="hero-sub">Одно письмо и одно приглашение</p>
+    <a href="#letter" class="hero-scroll">
+      <div class="scroll-line"></div>
+      Открой
+    </a>
+  </div>
+</section>
+
+<section id="letter">
+  <div class="letter-bg-img"></div>
+  <div class="letter-card">
+    <div class="letter-decoration">· · · ·</div>
+    <p class="letter-greeting">Привет, любимая.</p>
+    <p class="letter-body">Я наговорил лишнего. Знаю это. И не пытаюсь оправдаться — вспыльчивость не оправдание, я сам это понимаю.
+
+Ты важна мне. Сильнее, чем любое слово в тот момент. И мне стыдно, что дал тебе почувствовать обратное.
+
+Я хочу исправить это не словами — а тем, что будет дальше на этой странице.
+
+Ты заслуживаешь хорошего вечера. Я хочу его подарить тебе — по-твоему, так, как тебе нравится.</p>
+    <div class="letter-decoration" style="margin-top: 24px;">· · · ·</div>
+    <p class="letter-sig">Твой 🌹</p>
+  </div>
+  <a href="#gallery" class="btn-primary" style="max-width:320px; margin-top: 32px; position:relative; z-index:1;">
+    Посмотреть наши моменты →
+  </a>
+</section>
+
+<section id="gallery">
+  <p class="section-label">Эстетика воспоминаний</p>
+  <h2 class="section-title">То, чем я дорожу</h2>
+  
+  <div class="gallery-grid">
+    <!-- Полароид 1 -->
+    <div class="polaroid" style="--r: -3deg;">
+      <img src="2026-05-30 21.13.25.jpg" alt="Момент">
+      <p class="polaroid-caption">Твоя улыбка</p>
+    </div>
+    <!-- Полароид 2 (Видео 1) -->
+    <div class="polaroid" style="--r: 2deg;">
+      <video src="2026-05-30 21.35.53.mp4" autoplay loop muted playsinline></video>
+      <p class="polaroid-caption">Самые живые секунды 💫</p>
+    </div>
+    <!-- Полароид 3 -->
+    <div class="polaroid" style="--r: -1deg;">
+      <img src="2026-05-30 21.24.27.jpg" alt="Момент">
+      <p class="polaroid-caption">Вместе уютнее</p>
+    </div>
+    <!-- Полароид 4 -->
+    <div class="polaroid" style="--r: 4deg;">
+      <img src="2026-05-30 21.26.24.jpg" alt="Момент">
+      <p class="polaroid-caption">Взгляд, который обожаю</p>
+    </div>
+    <!-- Полароид 5 (Видео 2) -->
+    <div class="polaroid" style="--r: -4deg;">
+      <video src="2026-05-30 21.37.03.mp4" autoplay loop muted playsinline></video>
+      <p class="polaroid-caption">Смех и радость 🤍</p>
+    </div>
+    <!-- Полароид 6 -->
+    <div class="polaroid" style="--r: 3deg;">
+      <img src="IMG_4431.JPG" alt="Момент">
+      <p class="polaroid-caption">Моя бесконечная нежность</p>
+    </div>
+  </div>
+
+  <a href="#quiz" class="btn-primary" style="max-width:320px; margin-top: 48px;">
+    Перейти к планированию →
+  </a>
+</section>
+
+<section id="quiz">
+  <p class="section-label">Планировщик свидания</p>
+  <h2 class="section-title">Расскажи, как ты хочешь</h2>
+
+  <div class="steps-indicator">
+    <div class="step-dot active"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+    <div class="step-dot"></div>
+  </div>
+
+  <div class="quiz-step active" id="step0">
+    <p class="step-question">What do you want to taste?</p>
+    <p class="step-hint">Можно выбрать несколько блюд</p>
+
+    <p class="food-section-title">🍜 Азиатская кухня</p>
+    <div class="food-grid">
+      <div class="food-card" data-val="tom-yam"><span class="food-emoji">🍜</span><span class="food-name">Том Ям</span><span class="food-desc">Тайский суп</span></div>
+      <div class="food-card" data-val="rolls"><span class="food-emoji">🍱</span><span class="food-name">Роллы</span><span class="food-desc">Японская кухня</span></div>
+      <div class="food-card" data-val="sushi"><span class="food-emoji">🍣</span><span class="food-name">Суши</span><span class="food-desc">Классика</span></div>
+      <div class="food-card" data-val="ramen"><span class="food-emoji">🍝</span><span class="food-name">Рамен</span><span class="food-desc">Японский бульон</span></div>
+      <div class="food-card" data-val="pad-thai"><span class="food-emoji">🥢</span><span class="food-name">Пад Тай</span><span class="food-desc">Жареная лапша</span></div>
+      <div class="food-card" data-val="bubble-tea"><span class="food-emoji">🧋</span><span class="food-name">Бабл Ти</span><span class="food-desc">С жемчугом</span></div>
+    </div>
+
+    <p class="food-section-title">🍕 Европейская кухня</p>
+    <div class="food-grid">
+      <div class="food-card" data-val="pizza"><span class="food-emoji">🍕</span><span class="food-name">Пицца</span><span class="food-desc">Итальянская</span></div>
+      <div class="food-card" data-val="pasta"><span class="food-emoji">🍝</span><span class="food-name">Паста</span><span class="food-desc">Карбонара / болоньезе</span></div>
+      <div class="food-card" data-val="risotto"><span class="food-emoji">𫄗</span><span class="food-name">Ризотто</span><span class="food-desc">Сливочное</span></div>
+      <div class="food-card" data-val="macarons"><span class="food-emoji">🫐</span><span class="food-name">Макарони</span><span class="food-desc">Паста с соусом</span></div>
+      <div class="food-card" data-val="bruschetta"><span class="food-emoji">🥖</span><span class="food-name">Брускетта</span><span class="food-desc">Итальянский хлеб</span></div>
+      <div class="food-card" data-val="burger"><span class="food-emoji">🍔</span><span class="food-name">Бургер</span><span class="food-desc">Крафтовый</span></div>
+    </div>
+
+    <p class="food-section-title">🥩 Мясное & Гриль</p>
+    <div class="food-grid">
+      <div class="food-card" data-val="shashlyk"><span class="food-emoji">🥩</span><span class="food-name">Шашлык</span><span class="food-desc">На углях</span></div>
+      <div class="food-card" data-val="steak"><span class="food-emoji">🥓</span><span class="food-name">Стейк</span><span class="food-desc">Ribeye / Striploin</span></div>
+      <div class="food-card" data-val="ribs"><span class="food-emoji">🍖</span><span class="food-name">Рёбрышки</span><span class="food-desc">BBQ</span></div>
+    </div>
+
+    <p class="food-section-title">🎂 Десерты</p>
+    <div class="food-grid">
+      <div class="food-card" data-val="tiramisu"><span class="food-emoji">☕</span><span class="food-name">Тирамису</span><span class="food-desc">Итальянский десерт</span></div>
+      <div class="food-card" data-val="cheesecake"><span class="food-emoji">🍰</span><span class="food-name">Чизкейк</span><span class="food-desc">Нью-Йоркский</span></div>
+      <div class="food-card" data-val="chocolate-cake"><span class="food-emoji">🎂</span><span class="food-name">Шоколадный торт</span><span class="food-desc">Тёмный шоколад</span></div>
+      <div class="food-card" data-val="honey-cake"><span class="food-emoji">🍯</span><span class="food-name">Медовик</span><span class="food-desc">Домашний вкус</span></div>
+      <div class="food-card" data-val="crepes"><span class="food-emoji">🥞</span><span class="food-name">Блинчики</span><span class="food-desc">С ягодами</span></div>
+      <div class="food-card" data-val="ice-cream"><span class="food-emoji">🍦</span><span class="food-name">Мороженое</span><span class="food-desc">Разные шарики</span></div>
+    </div>
+
+    <div style="margin-bottom:32px;"></div>
+    <button class="btn-primary" onclick="nextStep(0)">Продолжить →</button>
+  </div>
+
+  <div class="quiz-step" id="step1">
+    <p class="step-question">Когда тебе удобно?</p>
+    <p class="step-hint">Выбери дату на календаре</p>
+    <div class="calendar-wrap">
+      <div class="cal-header">
+        <button class="cal-nav" onclick="changeMonth(-1)">‹</button>
+        <span class="cal-month" id="calMonthLabel"></span>
+        <button class="cal-nav" onclick="changeMonth(1)">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid">
+        <div class="cal-day-name">Пн</div><div class="cal-day-name">Вт</div><div class="cal-day-name">Ср</div>
+        <div class="cal-day-name">Чт</div><div class="cal-day-name">Пт</div><div class="cal-day-name">Сб</div><div class="cal-day-name">Вс</div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="nextStep(1)">Продолжить →</button>
+    <button class="btn-secondary" onclick="prevStep(1)">← Назад</button>
+  </div>
+
+  <div class="quiz-step" id="step2">
+    <p class="step-question">В какое время?</p>
+    <p class="step-hint">Выбери удобный промежуток</p>
+    <div class="time-grid">
+      <div class="time-slot" data-val="12:00-14:00"><span class="time-emoji">☀️</span>12:00 – 14:00<br><small style="font-size:10px;color:var(--text-muted)">Дневное</small></div>
+      <div class="time-slot" data-val="14:00-17:00"><span class="time-emoji">🌤️</span>14:00 – 17:00<br><small style="font-size:10px;color:var(--text-muted)">Послеобед</small></div>
+      <div class="time-slot" data-val="17:00-19:00"><span class="time-emoji">🌇</span>17:00 – 19:00<br><small style="font-size:10px;color:var(--text-muted)">Вечернее</small></div>
+      <div class="time-slot" data-val="19:00-21:00"><span class="time-emoji">🌆</span>19:00 – 21:00<br><small style="font-size:10px;color:var(--text-muted)">Романтик</small></div>
+      <div class="time-slot" data-val="21:00+"><span class="time-emoji">🌙</span>21:00+<br><small style="font-size:10px;color:var(--text-muted)">Ночь</small></div>
+      <div class="time-slot" data-val="surprise"><span class="time-emoji">🎁</span>Сюрприз!<br><small style="font-size:10px;color:var(--text-muted)">Доверяю тебе</small></div>
+    </div>
+    <button class="btn-primary" onclick="nextStep(2)">Продолжить →</button>
+    <button class="btn-secondary" onclick="prevStep(2)">← Назад</button>
+  </div>
+
+  <div class="quiz-step" id="step3">
+    <p class="step-question">В чём мне прийти?</p>
+    <p class="step-hint">Настрой мой образ — я оденусь именно так</p>
+    <div class="outfit-stage">
+      
+      <div class="photo-frame-guy">
+        <img src="dclassic 2025-11-12 181542.363.JPG" id="guyPhoto" alt="Твой парень">
+        <div class="outfit-overlay-label" id="guyOutfitLabel">Выбрано: Белая футболка + Чёрные джинсы</div>
+      </div>
+
+      <div class="outfit-controls">
+        <div class="outfit-section" data-part="top">
+          <p class="outfit-label">Верх</p>
+          <div class="outfit-options">
+            <button class="outfit-btn selected" onclick="setTop('Белую футболку', event)">Футболка белая</button>
+            <button class="outfit-btn" onclick="setTop('Зелёную футболку', event)">Футболка зелёная</button>
+            <button class="outfit-btn" onclick="setTop('Бежевое поло', event)">Поло бежевое</button>
+            <button class="outfit-btn" onclick="setTop('Фиолетовое поло', event)">Поло фиолетовое</button>
+            <button class="outfit-btn" onclick="setTop('Синий свитер', event)">Свитер синий</button>
+            <button class="outfit-btn" onclick="setTop('Бежевую кофту', event)">Кофта бежевая</button>
+          </div>
+        </div>
+        <div class="outfit-section" data-part="bottom">
+          <p class="outfit-label">Низ</p>
+          <div class="outfit-options">
+            <button class="outfit-btn selected" onclick="setBottom('Чёрные джинсы', event)">Джинсы чёрные</button>
+            <button class="outfit-btn" onclick="setBottom('Зелёные чиносы', event)">Чиносы зелёные</button>
+            <button class="outfit-btn meme-btn" onclick="showMeme()">🤍 Белые штаны</button>
+          </div>
+        </div>
+        <div class="outfit-section" data-part="shoes">
+          <p class="outfit-label">Обувь</p>
+          <div class="outfit-options">
+            <button class="outfit-btn selected" onclick="setShoes('Белые кеды', event)">Белые кеды</button>
+            <button class="outfit-btn" onclick="setShoes('Лоферы', event)">Лоферы</button>
+          </div>
+        </div>
+        <div class="outfit-section" data-part="acc">
+          <p class="outfit-label">Аксессуары</p>
+          <div class="outfit-options">
+            <button class="outfit-btn selected" onclick="setWatch(true, event)">⌚ Часы — да</button>
+            <button class="outfit-btn" onclick="setWatch(false, event)">Без часов</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="nextStep(3)">Продолжить →</button>
+    <button class="btn-secondary" onclick="prevStep(3)">← Назад</button>
+  </div>
+
+  <div class="quiz-step" id="step4">
+    <p class="step-question">Какое настроение свидания?</p>
+    <p class="step-hint">Это поможет мне всё организовать</p>
+    <div class="vibe-grid">
+      <div class="vibe-card" data-val="romantic"><div class="vibe-icon">🕯️</div><div class="vibe-name">Романтично</div></div>
+      <div class="vibe-card" data-val="fun"><div class="vibe-icon">🎉</div><div class="vibe-name">Весело</div></div>
+      <div class="vibe-card" data-val="chill"><div class="vibe-icon">🍵</div><div class="vibe-name">Спокойно</div></div>
+      <div class="vibe-card" data-val="adventure"><div class="vibe-icon">🗺️</div><div class="vibe-name">Приключение</div></div>
+    </div>
+    <p class="step-hint" style="margin-bottom:12px;">Хочешь добавить что-то?</p>
+    <textarea class="comment-box" id="noteBox" rows="3" placeholder="Пожелания, мечты, что угодно... 🌸"></textarea>
+    <button class="btn-primary" id="submitBtn" onclick="finish()">Отправить ответы 💌</button>
+    <p class="tg-status" id="tgStatus"></p>
+    <button class="btn-secondary" onclick="prevStep(4)">← Назад</button>
+  </div>
+</section>
+
+<section id="final">
+  <span class="final-heart">💌</span>
+  <h2 class="final-title">Спасибо, любимая Даяна</h2>
+  <p style="color:var(--text-muted); font-size:15px; font-weight:300; max-width:360px; text-align:center; line-height:1.7;">
+    Я прочитаю каждый твой ответ и постараюсь сделать всё идеально. Обещаю.
+  </p>
+  <div class="final-summary" id="finalSummary"></div>
+</section>
+
+<script>
+// ===== CONFIG =====
+const TG_TOKEN = '8998801531:AAG9sIM_H4-0DhunUh4b-3jejZLEnvDu538';
+const TG_CHAT_ID = '774063962';
+
+// ===== HERO SLIDER =====
+const heroImages = [
+  '2026-05-30 21.12.11.jpg',
+  '2026-05-30 21.12.28.jpg',
+  '2026-05-30 21.13.05.jpg'
+];
+const sliderContainer = document.getElementById('heroSlider');
+
+heroImages.forEach((imgSrc, index) => {
+  const slide = document.createElement('div');
+  slide.className = 'hero-slide';
+  slide.style.backgroundImage = `url("${imgSrc}")`;
+  if (index === 0) slide.classList.add('active');
+  sliderContainer.appendChild(slide);
+});
+
+let currentSlide = 0;
+setInterval(() => {
+  const slides = document.querySelectorAll('.hero-slide');
+  if (slides.length > 0) {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }
+}, 5000);
+
+// ===== PETALS =====
+const pc = document.getElementById('petalsContainer');
+for (let i = 0; i < 18; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*-20}%;width:${8+Math.random()*10}px;height:${12+Math.random()*12}px;animation-duration:${6+Math.random()*8}s;animation-delay:${Math.random()*8}s;background:hsl(${345+Math.random()*20},${60+Math.random()*20}%,${70+Math.random()*15}%);`;
+  pc.appendChild(p);
+}
+
+// ===== STATE =====
+const answers = {
+  food: [], date: null, time: null,
+  top: 'Белую футболку', bottom: 'Чёрные джинсы', shoes: 'Белые кеды', watch: true,
+  vibe: null, note: ''
+};
+
+// ===== STEP NAV =====
+function showStep(n) {
+  document.querySelectorAll('.quiz-step').forEach((s,i) => s.classList.toggle('active', i===n));
+  document.querySelectorAll('.step-dot').forEach((d,i) => { d.classList.toggle('active', i===n); d.classList.toggle('done', i<n); });
+  document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+}
+function nextStep(from) { showStep(from+1); }
+function prevStep(from) { showStep(from-1); }
+
+// ===== FOOD =====
+document.querySelectorAll('.food-card').forEach(c => {
+  c.addEventListener('click', () => {
+    c.classList.toggle('selected');
+    const v = c.dataset.val;
+    if (c.classList.contains('selected')) answers.food.push(v);
+    else answers.food = answers.food.filter(x => x!==v);
+  });
+});
+
+// ===== CALENDAR =====
+const months = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+let calYear, calMonth;
+function initCal() { const now = new Date(); calYear = now.getFullYear(); calMonth = now.getMonth(); renderCal(); }
+function changeMonth(d) { calMonth += d; if (calMonth > 11) { calMonth=0; calYear++; } if (calMonth<0) { calMonth=11; calYear--; } renderCal(); }
+function renderCal() {
+  document.getElementById('calMonthLabel').textContent = months[calMonth]+' '+calYear;
+  const grid = document.getElementById('calGrid');
+  grid.querySelectorAll('.cal-day').forEach(e => e.remove());
+  let startDay = new Date(calYear, calMonth, 1).getDay()-1; if (startDay<0) startDay=6;
+  const days = new Date(calYear, calMonth+1, 0).getDate();
+  const today = new Date();
+  for (let i=0; i<startDay; i++) { const e=document.createElement('div'); e.className='cal-day empty'; grid.appendChild(e); }
+  for (let d=1; d<=days; d++) {
+    const el=document.createElement('div'); el.className='cal-day'; el.textContent=d;
+    const thisDate=new Date(calYear,calMonth,d);
+    if (thisDate < new Date(today.getFullYear(),today.getMonth(),today.getDate())) el.classList.add('past');
+    if (d===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear()) el.classList.add('today');
+    if (answers.date&&answers.date.d===d&&answers.date.m===calMonth&&answers.date.y===calYear) el.classList.add('selected');
+    el.addEventListener('click', () => {
+      if (el.classList.contains('past')) return;
+      grid.querySelectorAll('.cal-day.selected').forEach(x => x.classList.remove('selected'));
+      el.classList.add('selected');
+      answers.date = {d, m:calMonth, y:calYear, label:`${d} ${months[calMonth]} ${calYear}`};
+    });
+    grid.appendChild(el);
+  }
+}
+initCal();
+
+// ===== TIME =====
+document.querySelectorAll('.time-slot').forEach(s => {
+  s.addEventListener('click', () => { document.querySelectorAll('.time-slot').forEach(x => x.classList.remove('selected')); s.classList.add('selected'); answers.time = s.dataset.val; });
+});
+
+// ===== OUTFIT LOGIC =====
+function selectBtns(section, clickedBtn) {
+  section.querySelectorAll('.outfit-btn').forEach(b => b.classList.remove('selected'));
+  clickedBtn.classList.add('selected');
+  updateOutfitLabel();
+}
+function updateOutfitLabel() {
+  const label = document.getElementById('guyOutfitLabel');
+  label.textContent = `Выбрано: ${answers.top} + ${answers.bottom} (${answers.shoes})${answers.watch ? ' + ⌚' : ''}`;
+}
+function setTop(name, event) {
+  answers.top = name;
+  selectBtns(event.target.closest('.outfit-section'), event.target);
+}
+function setBottom(name, event) {
+  answers.bottom = name;
+  selectBtns(event.target.closest('.outfit-section'), event.target);
+}
+function setShoes(name, event) {
+  answers.shoes = name;
+  selectBtns(event.target.closest('.outfit-section'), event.target);
+}
+function setWatch(val, event) {
+  answers.watch = val;
+  selectBtns(event.target.closest('.outfit-section'), event.target);
+}
+
+// ===== MEME =====
+function showMeme() { document.getElementById('memeOverlay').classList.add('show'); }
+function closeMeme() { document.getElementById('memeOverlay').classList.remove('show'); }
+
+// ===== VIBE =====
+document.querySelectorAll('.vibe-card').forEach(c => {
+  c.addEventListener('click', () => { document.querySelectorAll('.vibe-card').forEach(x => x.classList.remove('selected')); c.classList.add('selected'); answers.vibe = c.dataset.val; });
+});
+
+// ===== LABELS =====
+const foodLabels = {
+  'tom-yam':'Том Ям 🍜','rolls':'Роллы 🍱','sushi':'Суши 🍣','ramen':'Рамен 🍝','pad-thai':'Пад Тай 🥢',
+  'bubble-tea':'Бабл Ти 🧋','pizza':'Пицца 🍕','pasta':'Паста 🍝','risotto':'Ризотто 🫕',
+  'macarons':'Макарони 🫐','bruschetta':'Брускетта 🥖','burger':'Бургер 🍔',
+  'shashlyk':'Шашлык 🥩','steak':'Стейк 🥓','ribs':'Рёбрышки 🍖',
+  'tiramisu':'Тирамису ☕','cheesecake':'Чизкейк 🍰','chocolate-cake':'Шоколадный торт 🎂',
+  'honey-cake':'Медовик 🍯','crepes':'Блинчики 🥞','ice-cream':'Мороженое 🍦'
+};
+const vibeLabels = {romantic:'Романтично 🕯️',fun:'Весело 🎉',chill:'Спокойно 🍵',adventure:'Приключение 🗺️'};
+
+// ===== TELEGRAM =====
+async function sendToTelegram(text) {
+  try {
+    const r = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({chat_id: TG_CHAT_ID, text, parse_mode:'HTML'})
+    });
+    return r.ok;
+  } catch(e) { return false; }
+}
+
+// ===== FINISH =====
+async function finish() {
+  answers.note = document.getElementById('noteBox').value;
+  const btn = document.getElementById('submitBtn');
+  const status = document.getElementById('tgStatus');
+  btn.textContent = 'Отправляю... 💌';
+  btn.disabled = true;
+
+  const msg = `💌 <b>Даяна заполнила анкету!</b>\n\n`+
+    `🍽 <b>Хочет поесть:</b> ${answers.food.map(f=>foodLabels[f]||f).join(', ')||'не выбрала'}\n`+
+    `📅 <b>Дата:</b> ${answers.date ? answers.date.label : 'не выбрала'}\n`+
+    `🕐 <b>Время:</b> ${answers.time||'не выбрала'}\n`+
+    `👕 <b>Верх:</b> ${answers.top}\n`+
+    `👖 <b>Низ:</b> ${answers.bottom}\n`+
+    `👟 <b>Обувь:</b> ${answers.shoes}\n`+
+    `⌚ <b>Часы:</b> ${answers.watch ? 'Да, надень' : 'Без часов'}\n`+
+    `✨ <b>Настроение:</b> ${vibeLabels[answers.vibe]||'не выбрала'}\n`+
+    `${answers.note ? `💬 <b>Пожелание:</b> ${answers.note}` : ''}`;
+
+  const sent = await sendToTelegram(msg);
+  if (sent) status.textContent = '✓ Ответы отправлены!';
+  else status.textContent = 'Ошибка отправки, но ответы сохранены ниже.';
+
+  document.getElementById('quiz').style.display = 'none';
+  const final = document.getElementById('final');
+  final.classList.add('show');
+
+  document.getElementById('finalSummary').innerHTML = `
+    <div class="summary-row"><span class="summary-icon">🍽️</span><div><div class="summary-label">Хочет поесть</div><div class="summary-val">${answers.food.map(f=>foodLabels[f]||f).join(', ')||'Не выбрано'}</div></div></div>
+    <div class="summary-row"><span class="summary-icon">📅</span><div><div class="summary-label">Дата</div><div class="summary-val">${answers.date ? answers.date.label : 'Не выбрана'}</div></div></div>
+    <div class="summary-row"><span class="summary-icon">🕐</span><div><div class="summary-label">Время</div><div class="summary-val">${answers.time||'Не выбрано'}</div></div></div>
+    <div class="summary-row"><span class="summary-icon">👕</span><div><div class="summary-label">Образ</div><div class="summary-val">${answers.top} + ${answers.bottom} + ${answers.shoes} · ${answers.watch ? '⌚ с часами' : 'без часов'}</div></div></div>
+    <div class="summary-row"><span class="summary-icon">✨</span><div><div class="summary-label">Настроение</div><div class="summary-val">${vibeLabels[answers.vibe]||'Не выбрано'}</div></div></div>
+    ${answers.note ? `<div class="summary-row"><span class="summary-icon">💬</span><div><div class="summary-label">Пожелание</div><div class="summary-val">${answers.note}</div></div></div>` : ''}
+  `;
+  final.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
