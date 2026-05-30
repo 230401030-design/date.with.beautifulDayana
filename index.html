@@ -14,156 +14,29 @@
   }
   html { scroll-behavior: smooth; }
   body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; overflow-x: hidden; }
-  
-  /* PETALS BACKGROUND */
   .petals-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
   .petal { position: absolute; width: 12px; height: 16px; border-radius: 50% 0 50% 0; background: var(--blush); opacity: 0.18; animation: fall linear infinite; }
   @keyframes fall { 0% { transform: translateY(-40px) rotate(0deg); opacity: 0; } 10% { opacity: 0.18; } 90% { opacity: 0.18; } 100% { transform: translateY(110vh) rotate(540deg); opacity: 0; } }
-  
-  section { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 24px; }
-  
-  /* HERO WITH BACKGROUND SLIDER */
-  #hero { position: relative; overflow: hidden; text-align: center; background: #2c2021; }
-  .hero-bg-slider { position: absolute; inset: 0; z-index: 0; opacity: 0.55; }
-  .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease-in-out; }
-  .hero-slide.active { opacity: 1; }
-  
-  .hero-content { position: relative; z-index: 2; max-width: 600px; padding: 20px; }
-  .hero-flower { font-size: 70px; animation: bloom 1.2s ease-out both; display: block; margin-bottom: 16px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); }
+  section { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px; }
+  #hero { background: linear-gradient(160deg, #fdf1f2 0%, #f5dde0 50%, #faf0f0 100%); text-align: center; }
+  .hero-flower { font-size: 80px; animation: bloom 1.2s ease-out both; display: block; margin-bottom: 24px; }
   @keyframes bloom { 0% { transform: scale(0) rotate(-30deg); opacity: 0; } 70% { transform: scale(1.15) rotate(5deg); } 100% { transform: scale(1) rotate(0); opacity: 1; } }
-  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(46px, 11vw, 76px); font-weight: 300; letter-spacing: 0.03em; color: #fff; text-shadow: 0 2px 15px rgba(0,0,0,0.4); line-height: 1.1; animation: fadeUp 1s 0.3s ease-out both; }
-  .hero-sub { font-size: 14px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose-light); margin-top: 20px; text-shadow: 0 1px 8px rgba(0,0,0,0.5); animation: fadeUp 1s 0.6s ease-out both; }
-  .hero-scroll { margin-top: 60px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; opacity: 0.8; cursor: pointer; animation: fadeUp 1s 1s ease-out both; text-decoration: none; }
-  .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, #fff, transparent); animation: scrollPulse 2s ease-in-out infinite; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 10vw, 72px); font-weight: 300; letter-spacing: 0.02em; color: var(--rose-dark); line-height: 1.1; animation: fadeUp 1s 0.3s ease-out both; }
+  .hero-sub { font-size: 14px; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-top: 16px; animation: fadeUp 1s 0.6s ease-out both; }
+  .hero-scroll { margin-top: 48px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); cursor: pointer; animation: fadeUp 1s 1s ease-out both; text-decoration: none; }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--rose), transparent); animation: scrollPulse 2s ease-in-out infinite; }
   @keyframes scrollPulse { 0%, 100% { transform: scaleY(1); opacity: 1; } 50% { transform: scaleY(0.6); opacity: 0.5; } }
   @keyframes fadeUp { 0% { transform: translateY(24px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
-  
-  /* LETTER WITH BLURRED IMAGE BG */
-  #letter { background: #221819; position: relative; overflow: hidden; }
-  .letter-bg-img { position: absolute; inset: 0; background-image: url("ccdr 2025-11-12 180907.546.JPG"); background-size: cover; background-position: center; filter: blur(8px) brightness(0.5); transform: scale(1.05); z-index: 0; }
-  .letter-card { position: relative; z-index: 1; max-width: 560px; width: 100%; background: rgba(255, 255, 255, 0.96); border-radius: 4px; padding: 48px 40px; box-shadow: 0 15px 45px rgba(0,0,0,0.2); backdrop-filter: blur(4px); }
-  .letter-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--rose-light), var(--rose), var(--rose-light)); }
-  .letter-greeting { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-style: italic; font-weight: 300; color: var(--rose-dark); margin-bottom: 24px; }
+  #letter { background: var(--warm); }
+  .letter-card { max-width: 560px; width: 100%; background: white; border-radius: 2px; padding: 48px 40px; position: relative; box-shadow: 0 2px 40px rgba(139,60,68,0.07); }
+  .letter-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--rose-light), var(--rose), var(--rose-light)); }
+  .letter-greeting { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; font-weight: 300; color: var(--rose-dark); margin-bottom: 24px; }
   .letter-body { font-size: 16px; line-height: 1.9; font-weight: 300; color: var(--text); white-space: pre-line; }
-  .letter-sig { margin-top: 32px; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-style: italic; color: var(--rose-dark); text-align: right; }
+  .letter-sig { margin-top: 32px; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; color: var(--rose-dark); text-align: right; }
   .letter-decoration { text-align: center; margin: 20px 0; color: var(--blush); letter-spacing: 12px; font-size: 14px; }
-  
-  /* CHAOTIC ORGANIC GALLERY */
-  #gallery { background: var(--warm); padding: 100px 16px; overflow: hidden; }
-  .gallery-container { max-width: 1200px; width: 100%; margin: 0 auto; }
-  
-  /* Асимметричная сетка */
-  .gallery-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-    gap: 32px; 
-    align-items: center;
-  }
-  
-  .gallery-card {
-    position: relative;
-    background: #ffffff;
-    padding: 12px 12px 12px 12px;
-    border-radius: 8px;
-    box-shadow: 0 12px 35px rgba(0,0,0,0.06);
-    cursor: pointer;
-    overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-    z-index: 1;
-  }
-  
-  /* Прикольный эффект хаотичного разброса по умолчанию */
-  .gallery-card.tilt-left { transform: rotate(-3deg) translateY(5px); }
-  .gallery-card.tilt-right { transform: rotate(3deg) translateY(-8px); }
-  .gallery-card.tilt-slight-left { transform: rotate(-1.5deg) translateY(-2px); }
-  .gallery-card.tilt-slight-right { transform: rotate(1.5deg) translateY(6px); }
-  
-  /* При наведении фото мягко выравнивается и увеличивается */
-  .gallery-card:hover {
-    transform: scale(1.06) rotate(0deg) translateY(-10px) !important;
-    box-shadow: 0 22px 45px rgba(139,60,68,0.18);
-    z-index: 10;
-  }
-  
-  .gallery-card img, .gallery-card video {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: 4px;
-    display: block;
-  }
-
-  /* Иконка видео */
-  .video-badge {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(4px);
-    color: var(--text);
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  /* LIGHTBOX MODAL */
-  .lightbox-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(26, 18, 19, 0.98);
-    z-index: 1000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  .lightbox-modal.show {
-    display: flex;
-    opacity: 1;
-  }
-  .lightbox-close {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 36px;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .lightbox-close:hover {
-    transform: scale(1.1);
-  }
-  .lightbox-media-container {
-    max-width: 90%;
-    max-height: 85vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .lightbox-media-container img,
-  .lightbox-media-container video {
-    max-width: 100%;
-    max-height: 85vh;
-    border-radius: 8px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    object-fit: contain;
-  }
-
-  /* QUIZ & STUFF */
-  #quiz { background: var(--cream); padding-top: 100px; }
+  #quiz { background: var(--cream); padding-top: 80px; }
   .section-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose); margin-bottom: 12px; text-align: center; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 7vw, 54px); font-weight: 300; text-align: center; color: var(--text); margin-bottom: 48px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 7vw, 52px); font-weight: 300; text-align: center; color: var(--text); margin-bottom: 48px; }
   .steps-indicator { display: flex; gap: 8px; justify-content: center; margin-bottom: 40px; }
   .step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rose-light); transition: all 0.3s; cursor: pointer; }
   .step-dot.active { background: var(--rose); transform: scale(1.4); }
@@ -171,10 +44,9 @@
   .quiz-step { display: none; width: 100%; max-width: 720px; }
   .quiz-step.active { display: block; animation: stepIn 0.4s ease-out; }
   @keyframes stepIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-  .step-question { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; text-align: center; margin-bottom: 8px; color: var(--text); }
+  .step-question { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; text-align: center; margin-bottom: 8px; color: var(--text); }
   .step-hint { font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 32px; font-weight: 300; }
-  
-  .food-section-title { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rose); margin: 24px 0 12px; font-weight: 500; }
+  .food-section-title { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rose); margin: 20px 0 10px; font-weight: 500; }
   .food-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; margin-bottom: 12px; }
   .food-card { background: white; border: 1.5px solid var(--rose-light); border-radius: 12px; padding: 14px 8px 10px; text-align: center; cursor: pointer; transition: all 0.25s; user-select: none; }
   .food-card:hover { border-color: var(--rose); transform: translateY(-2px); }
@@ -182,7 +54,6 @@
   .food-emoji { font-size: 32px; display: block; margin-bottom: 6px; }
   .food-name { font-size: 13px; font-weight: 400; color: var(--text); }
   .food-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; font-weight: 300; }
-  
   .calendar-wrap { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--rose-light); margin-bottom: 24px; }
   .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
   .cal-month { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; }
@@ -196,69 +67,75 @@
   .cal-day.today { border: 1.5px solid var(--rose); color: var(--rose); font-weight: 500; }
   .cal-day.past { color: #ccc; cursor: default; }
   .cal-day.empty { cursor: default; }
-  
   .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
   .time-slot { background: white; border: 1.5px solid var(--rose-light); border-radius: 10px; padding: 12px 8px; text-align: center; cursor: pointer; transition: all 0.25s; font-size: 14px; }
   .time-slot:hover { border-color: var(--rose); }
   .time-slot.selected { background: var(--rose-pale); border-color: var(--rose); color: var(--rose-dark); font-weight: 500; }
   .time-emoji { display: block; font-size: 18px; margin-bottom: 4px; }
-  
-  /* OUTFIT WITH REAL BOY PHOTO */
-  .outfit-stage { display: flex; flex-direction: column; align-items: center; gap: 24px; margin-bottom: 32px; }
-  .photo-frame-guy { width: 190px; height: 270px; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid white; background: #fafaf8; position: relative; }
-  .photo-frame-guy img { width: 100%; height: 100%; object-fit: cover; transition: filter 0.3s; }
-  .outfit-overlay-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.4); color: white; font-size: 12px; text-align: center; padding: 6px 4px; backdrop-filter: blur(2px); }
-
+  .outfit-stage { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-bottom: 32px; }
+  .figure-svg { width: 160px; height: 260px; }
   .outfit-controls { width: 100%; max-width: 520px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .outfit-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
   .outfit-options { display: flex; flex-wrap: wrap; gap: 6px; }
   .outfit-btn { padding: 6px 12px; border: 1.5px solid var(--rose-light); border-radius: 20px; font-size: 12px; cursor: pointer; background: white; color: var(--text); transition: all 0.2s; font-family: 'Jost', sans-serif; }
   .outfit-btn:hover { border-color: var(--rose); }
   .outfit-btn.selected { background: var(--rose); border-color: var(--rose); color: white; }
-  .outfit-btn.meme-btn { border-color: #e0c050; background: #fffbe8; color: #7a6010; font-weight: 500; }
+  .outfit-btn.meme-btn { border-color: #e0c050; background: #fffbe8; color: #7a6010; }
   .outfit-btn.meme-btn:hover { background: #fff3a0; }
-  
   .vibe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-bottom: 32px; }
   .vibe-card { background: white; border: 1.5px solid var(--rose-light); border-radius: 12px; padding: 20px 12px; text-align: center; cursor: pointer; transition: all 0.25s; user-select: none; }
   .vibe-card:hover { transform: translateY(-2px); border-color: var(--rose); }
   .vibe-card.selected { background: var(--rose-pale); border-color: var(--rose); }
   .vibe-icon { font-size: 32px; margin-bottom: 8px; }
   .vibe-name { font-size: 14px; font-weight: 400; color: var(--text); }
-  
   .comment-box { width: 100%; border: 1.5px solid var(--rose-light); border-radius: 12px; padding: 16px; font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 300; color: var(--text); background: white; resize: none; outline: none; transition: border-color 0.2s; margin-bottom: 24px; }
   .comment-box:focus { border-color: var(--rose); }
-  
-  .btn-primary { display: block; width: 100%; padding: 16px; background: var(--rose); color: white; border: none; border-radius: 12px; font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 400; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s; text-align: center; text-decoration: none; }
+  .btn-primary { display: block; width: 100%; padding: 16px; background: var(--rose); color: white; border: none; border-radius: 12px; font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 400; letter-spacing: 0.05em; cursor: pointer; transition: all 0.2s; text-align: center; }
   .btn-primary:hover { background: var(--rose-dark); transform: translateY(-1px); }
   .btn-secondary { display: block; width: 100%; padding: 14px; background: transparent; color: var(--text-muted); border: 1px solid var(--rose-light); border-radius: 12px; font-family: 'Jost', sans-serif; font-size: 14px; cursor: pointer; transition: all 0.2s; margin-top: 10px; text-align: center; }
   .btn-secondary:hover { border-color: var(--rose); color: var(--rose); }
-  
   #final { background: linear-gradient(160deg, #fdf1f2 0%, var(--warm) 100%); text-align: center; display: none; }
   #final.show { display: flex; }
   .final-heart { font-size: 80px; animation: heartbeat 1.5s ease infinite; display: block; }
   @keyframes heartbeat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.15); } 60% { transform: scale(1.05); } }
-  .final-title { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 300; color: var(--rose-dark); margin: 24px 0 16px; }
-  
-  .final-summary { background: white; border-radius: 16px; padding: 24px; max-width: 480px; width: 100%; border: 1px solid var(--rose-light); margin-top: 24px; text-align: left; box-shadow: 0 10px 30px rgba(139,60,68,0.05); }
+  .final-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--rose-dark); margin: 24px 0 16px; }
+  .final-summary { background: white; border-radius: 16px; padding: 24px; max-width: 480px; width: 100%; border: 1px solid var(--rose-light); margin-top: 24px; text-align: left; }
   .summary-row { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--rose-light); font-size: 14px; }
   .summary-row:last-child { border-bottom: none; }
   .summary-icon { font-size: 20px; flex-shrink: 0; }
   .summary-label { color: var(--text-muted); font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 3px; }
   .summary-val { color: var(--text); font-weight: 400; }
-  
   /* MEME MODAL */
-  .meme-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 999; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+  .meme-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 999; align-items: center; justify-content: center; }
   .meme-overlay.show { display: flex; }
-  .meme-box { background: white; border-radius: 20px; padding: 32px 24px; max-width: 340px; width: 90%; text-align: center; animation: popIn 0.3s ease-out; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+  .meme-box { background: white; border-radius: 20px; padding: 32px 24px; max-width: 340px; width: 90%; text-align: center; animation: popIn 0.3s ease-out; }
   @keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
   .meme-emoji-big { font-size: 64px; display: block; margin-bottom: 16px; }
-  .meme-text { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--rose-dark); margin-bottom: 8px; }
+  .meme-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--rose-dark); margin-bottom: 8px; }
   .meme-sub { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
-  .meme-close { background: var(--rose); color: white; border: none; border-radius: 10px; padding: 12px 24px; font-family: 'Jost', sans-serif; font-size: 14px; cursor: pointer; width: 100%; transition: background 0.2s; }
-  .meme-close:hover { background: var(--rose-dark); }
-  
-  .tg-status { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 8px; min-height: 18px; font-weight: 500; }
+  .meme-close { background: var(--rose); color: white; border: none; border-radius: 10px; padding: 12px 24px; font-family: 'Jost', sans-serif; font-size: 14px; cursor: pointer; }
+  /* telegram status */
+  .tg-status { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 8px; min-height: 18px; }
   @media (max-width: 480px) { .letter-card { padding: 32px 20px; } .food-grid { grid-template-columns: repeat(2, 1fr); } .outfit-controls { grid-template-columns: 1fr; } }
+
+  /* GALLERY */
+  #gallery { background: var(--rose-pale); min-height: auto; padding: 80px 24px; }
+  .gallery-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 6vw, 44px); font-weight: 300; color: var(--rose-dark); text-align: center; margin-bottom: 8px; }
+  .gallery-sub { font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); text-align: center; margin-bottom: 48px; font-weight: 300; }
+  .gallery-masonry { columns: 3; column-gap: 12px; max-width: 800px; width: 100%; }
+  .gallery-item { break-inside: avoid; margin-bottom: 12px; border-radius: 12px; overflow: hidden; cursor: pointer; background: var(--rose-light); }
+  .gallery-item img { width: 100%; display: block; transition: transform 0.4s ease; }
+  .gallery-item:hover img { transform: scale(1.04); }
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .lightbox.show { display: flex; }
+  .lightbox img { max-width: 94vw; max-height: 88vh; border-radius: 10px; object-fit: contain; }
+  .lb-close { position: absolute; top: 16px; right: 20px; color: white; font-size: 36px; cursor: pointer; background: none; border: none; line-height: 1; }
+  .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 48px; cursor: pointer; background: none; border: none; padding: 0 16px; opacity: 0.6; transition: opacity 0.2s; user-select: none; }
+  .lb-nav:hover { opacity: 1; }
+  .lb-prev { left: 0; }
+  .lb-next { right: 0; }
+  .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
@@ -275,33 +152,19 @@
   </div>
 </div>
 
-<!-- LIGHTBOX MODAL -->
-<div class="lightbox-modal" id="lightboxModal">
-  <button class="lightbox-close" id="lightboxClose">&times;</button>
-  <div class="lightbox-media-container" id="lightboxMediaContainer">
-    <!-- Сюда динамически подставляется медиафайл -->
-  </div>
-</div>
-
-<!-- HERO С ФОНОВЫМ СЛАЙДЕРОМ -->
+<!-- HERO -->
 <section id="hero">
-  <div class="hero-bg-slider" id="heroSlider">
-    <!-- Слайды генерируются скриптом ниже -->
-  </div>
-  <div class="hero-content">
-    <span class="hero-flower">🌸</span>
-    <h1 class="hero-title">Для Даяны</h1>
-    <p class="hero-sub">Одно письмо и одно приглашение</p>
-    <a href="#letter" class="hero-scroll">
-      <div class="scroll-line"></div>
-      Открой
-    </a>
-  </div>
+  <span class="hero-flower">🌸</span>
+  <h1 class="hero-title">Для Даяны</h1>
+  <p class="hero-sub">Одно письмо и одно приглашение</p>
+  <a href="#letter" class="hero-scroll">
+    <div class="scroll-line"></div>
+    Открой
+  </a>
 </section>
 
-<!-- LETTER С РАЗМЫТЫМ ЗАДНИМ ФОНОМ -->
+<!-- LETTER -->
 <section id="letter">
-  <div class="letter-bg-img"></div>
   <div class="letter-card">
     <div class="letter-decoration">· · · ·</div>
     <p class="letter-greeting">Привет, любимая.</p>
@@ -315,88 +178,27 @@
     <div class="letter-decoration" style="margin-top: 24px;">· · · ·</div>
     <p class="letter-sig">Твой 🌹</p>
   </div>
-  <a href="#gallery" class="btn-primary" style="max-width:320px; margin-top: 32px; position:relative; z-index:1;">
-    Посмотреть наши моменты →
+  <a href="#quiz" class="btn-primary" style="max-width:320px; margin-top: 32px; position:relative; z-index:1; text-decoration:none; display:block; padding:16px; background:var(--rose); color:white; border-radius:12px; text-align:center; font-family:'Jost',sans-serif; font-size:15px;">
+    Спланировать свидание →
   </a>
 </section>
 
-<!-- CHAOTIC ORGANIC GALLERY (БЕЗ ПОДПИСЕЙ, ЧИСТЫЙ ВИЗУАЛ) -->
+
+<!-- GALLERY -->
 <section id="gallery">
-  <p class="section-label">Эстетика воспоминаний</p>
-  <h2 class="section-title">Наши моменты</h2>
-  
-  <div class="gallery-container">
-    <div class="gallery-grid">
-      
-      <!-- Фото 1 -->
-      <div class="gallery-card tilt-left" onclick="openLightbox('2026-05-30 21.13.25.jpg', 'image')">
-        <img src="2026-05-30 21.13.25.jpg" alt="Момент">
-      </div>
-      
-      <!-- Видео 1 -->
-      <div class="gallery-card tilt-right" onclick="openLightbox('2026-05-30 21.35.53.mp4', 'video')">
-        <div class="video-badge">▶</div>
-        <video src="2026-05-30 21.35.53.mp4" loop muted playsinline autoplay></video>
-      </div>
-      
-      <!-- Фото 2 -->
-      <div class="gallery-card tilt-slight-left" onclick="openLightbox('2026-05-30 21.24.27.jpg', 'image')">
-        <img src="2026-05-30 21.24.27.jpg" alt="Момент">
-      </div>
-      
-      <!-- Фото 3 -->
-      <div class="gallery-card tilt-slight-right" onclick="openLightbox('2026-05-30 21.26.24.jpg', 'image')">
-        <img src="2026-05-30 21.26.24.jpg" alt="Момент">
-      </div>
-      
-      <!-- Видео 2 -->
-      <div class="gallery-card tilt-left" onclick="openLightbox('2026-05-30 21.37.03.mp4', 'video')">
-        <div class="video-badge">▶</div>
-        <video src="2026-05-30 21.37.03.mp4" loop muted playsinline autoplay></video>
-      </div>
-      
-      <!-- Фото 4 -->
-      <div class="gallery-card tilt-right" onclick="openLightbox('IMG_4431.JPG', 'image')">
-        <img src="IMG_4431.JPG" alt="Момент">
-      </div>
-
-      <!-- Фото 5 -->
-      <div class="gallery-card tilt-slight-left" onclick="openLightbox('2026-05-30 21.36.02.jpg', 'image')">
-        <img src="2026-05-30 21.36.02.jpg" alt="Момент">
-      </div>
-
-      <!-- Фото 6 -->
-      <div class="gallery-card tilt-slight-right" onclick="openLightbox('2026-05-30 21.36.36.jpg', 'image')">
-        <img src="2026-05-30 21.36.36.jpg" alt="Момент">
-      </div>
-
-      <!-- Фото 7 -->
-      <div class="gallery-card tilt-left" onclick="openLightbox('2026-05-30 21.36.08.jpg', 'image')">
-        <img src="2026-05-30 21.36.08.jpg" alt="Момент">
-      </div>
-
-      <!-- Фото 8 -->
-      <div class="gallery-card tilt-right" onclick="openLightbox('2026-05-30 21.36.17.jpg', 'image')">
-        <img src="2026-05-30 21.36.17.jpg" alt="Момент">
-      </div>
-
-      <!-- Фото 9 -->
-      <div class="gallery-card tilt-slight-left" onclick="openLightbox('2026-05-30 21.36.23.jpg', 'image')">
-        <img src="2026-05-30 21.36.23.jpg" alt="Момент">
-      </div>
-
-      <!-- Фото 10 -->
-      <div class="gallery-card tilt-slight-right" onclick="openLightbox('2026-05-30 21.36.30.jpg', 'image')">
-        <img src="2026-05-30 21.36.30.jpg" alt="Момент">
-      </div>
-
-    </div>
-  </div>
-
-  <a href="#quiz" class="btn-primary" style="max-width:320px; margin-top: 48px;">
-    Перейти к планированию →
-  </a>
+  <p class="section-label fade-in">Наши моменты</p>
+  <h2 class="gallery-title fade-in">Ты и я</h2>
+  <p class="gallery-sub fade-in">маленькая коллекция того, что мне дорого</p>
+  <div class="gallery-masonry" id="galleryGrid"></div>
 </section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLb()">×</button>
+  <button class="lb-nav lb-prev" onclick="lbNav(-1)">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" onclick="lbNav(1)">›</button>
+</div>
 
 <!-- QUIZ -->
 <section id="quiz">
@@ -411,8 +213,9 @@
     <div class="step-dot"></div>
   </div>
 
+  <!-- STEP 0: Food -->
   <div class="quiz-step active" id="step0">
-    <p class="step-question">What do you want to taste?</p>
+    <p class="step-question">Что ты хочешь попробовать?</p>
     <p class="step-hint">Можно выбрать несколько блюд</p>
 
     <p class="food-section-title">🍜 Азиатская кухня</p>
@@ -429,7 +232,7 @@
     <div class="food-grid">
       <div class="food-card" data-val="pizza"><span class="food-emoji">🍕</span><span class="food-name">Пицца</span><span class="food-desc">Итальянская</span></div>
       <div class="food-card" data-val="pasta"><span class="food-emoji">🍝</span><span class="food-name">Паста</span><span class="food-desc">Карбонара / болоньезе</span></div>
-      <div class="food-card" data-val="risotto"><span class="food-emoji">𫄗</span><span class="food-name">Ризотто</span><span class="food-desc">Сливочное</span></div>
+      <div class="food-card" data-val="risotto"><span class="food-emoji">🫕</span><span class="food-name">Ризотто</span><span class="food-desc">Сливочное</span></div>
       <div class="food-card" data-val="macarons"><span class="food-emoji">🫐</span><span class="food-name">Макарони</span><span class="food-desc">Паста с соусом</span></div>
       <div class="food-card" data-val="bruschetta"><span class="food-emoji">🥖</span><span class="food-name">Брускетта</span><span class="food-desc">Итальянский хлеб</span></div>
       <div class="food-card" data-val="burger"><span class="food-emoji">🍔</span><span class="food-name">Бургер</span><span class="food-desc">Крафтовый</span></div>
@@ -456,6 +259,7 @@
     <button class="btn-primary" onclick="nextStep(0)">Продолжить →</button>
   </div>
 
+  <!-- STEP 1: Calendar -->
   <div class="quiz-step" id="step1">
     <p class="step-question">Когда тебе удобно?</p>
     <p class="step-hint">Выбери дату на календаре</p>
@@ -474,6 +278,7 @@
     <button class="btn-secondary" onclick="prevStep(1)">← Назад</button>
   </div>
 
+  <!-- STEP 2: Time -->
   <div class="quiz-step" id="step2">
     <p class="step-question">В какое время?</p>
     <p class="step-hint">Выбери удобный промежуток</p>
@@ -489,41 +294,52 @@
     <button class="btn-secondary" onclick="prevStep(2)">← Назад</button>
   </div>
 
+  <!-- STEP 3: Outfit -->
   <div class="quiz-step" id="step3">
     <p class="step-question">В чём мне прийти?</p>
     <p class="step-hint">Настрой мой образ — я оденусь именно так</p>
     <div class="outfit-stage">
-      
-      <div class="photo-frame-guy">
-        <img src="dclassic 2025-11-12 181542.363.JPG" id="guyPhoto" alt="Твой парень">
-        <div class="outfit-overlay-label" id="guyOutfitLabel">Выбрано: Белая футболка + Чёрные джинсы</div>
-      </div>
+      <svg class="figure-svg" viewBox="0 0 160 260" xmlns="http://www.w3.org/2000/svg" id="figureSvg">
+        <circle cx="80" cy="32" r="22" fill="#f5d5b8" stroke="#e0b899" stroke-width="1.5"/>
+        <ellipse id="figHair" cx="80" cy="20" rx="24" ry="16" fill="#3a2a1a"/>
+        <rect id="figShirt" x="52" y="56" width="56" height="52" rx="8" fill="#c9717a"/>
+        <rect id="figBottom" x="52" y="104" width="56" height="60" rx="6" fill="#3a4a5a"/>
+        <ellipse id="figShoeL" cx="65" cy="172" rx="13" ry="7" fill="#f0f0f0"/>
+        <ellipse id="figShoeR" cx="95" cy="172" rx="13" ry="7" fill="#f0f0f0"/>
+        <rect x="30" y="58" width="22" height="40" rx="10" fill="#f5d5b8" stroke="#e0b899" stroke-width="1"/>
+        <rect x="108" y="58" width="22" height="40" rx="10" fill="#f5d5b8" stroke="#e0b899" stroke-width="1"/>
+        <circle cx="72" cy="30" r="2.5" fill="#3a2018"/>
+        <circle cx="88" cy="30" r="2.5" fill="#3a2018"/>
+        <path d="M73 40 Q80 46 87 40" stroke="#c97060" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- Watch (hidden by default) -->
+        <rect id="figWatch" x="108" y="78" width="16" height="10" rx="3" fill="#c4a962" opacity="0" stroke="#a08030" stroke-width="0.5"/>
+      </svg>
 
       <div class="outfit-controls">
         <div class="outfit-section" data-part="top">
           <p class="outfit-label">Верх</p>
           <div class="outfit-options">
-            <button class="outfit-btn selected" onclick="setTop('Белую футболку', event)">Футболка белая</button>
-            <button class="outfit-btn" onclick="setTop('Зелёную футболку', event)">Футболка зелёная</button>
-            <button class="outfit-btn" onclick="setTop('Бежевое поло', event)">Поло бежевое</button>
-            <button class="outfit-btn" onclick="setTop('Фиолетовое поло', event)">Поло фиолетовое</button>
-            <button class="outfit-btn" onclick="setTop('Синий свитер', event)">Свитер синий</button>
-            <button class="outfit-btn" onclick="setTop('Бежевую кофту', event)">Кофта бежевая</button>
+            <button class="outfit-btn selected" onclick="setTop('Белая футболка','#eff3fa')">Футболка белая</button>
+            <button class="outfit-btn" onclick="setTop('Зелёная футболка','#4a7a5a')">Футболка зелёная</button>
+            <button class="outfit-btn" onclick="setTop('Поло бежевое','#c4a87a')">Поло бежевое</button>
+            <button class="outfit-btn" onclick="setTop('Поло фиолетовое','#7a5a9a')">Поло фиолетовое</button>
+            <button class="outfit-btn" onclick="setTop('Синий свитер','#3a5a8a')">Свитер синий</button>
+            <button class="outfit-btn" onclick="setTop('Бежевая кофта','#c4a87a')">Кофта бежевая</button>
           </div>
         </div>
         <div class="outfit-section" data-part="bottom">
           <p class="outfit-label">Низ</p>
           <div class="outfit-options">
-            <button class="outfit-btn selected" onclick="setBottom('Чёрные джинсы', event)">Джинсы чёрные</button>
-            <button class="outfit-btn" onclick="setBottom('Зелёные чиносы', event)">Чиносы зелёные</button>
+            <button class="outfit-btn selected" onclick="setBottom('Чёрные джинсы','#2a2a2a')">Джинсы чёрные</button>
+            <button class="outfit-btn" onclick="setBottom('Зелёные чиносы','#5a7a4a')">Чиносы зелёные</button>
             <button class="outfit-btn meme-btn" onclick="showMeme()">🤍 Белые штаны</button>
           </div>
         </div>
         <div class="outfit-section" data-part="shoes">
           <p class="outfit-label">Обувь</p>
           <div class="outfit-options">
-            <button class="outfit-btn selected" onclick="setShoes('Белые кеды', event)">Белые кеды</button>
-            <button class="outfit-btn" onclick="setShoes('Лоферы', event)">Лоферы</button>
+            <button class="outfit-btn selected" onclick="setShoes('Белые кеды','#f0f0f0')">Белые кеды</button>
+            <button class="outfit-btn" onclick="setShoes('Лоферы','#3a2a1a')">Лоферы</button>
           </div>
         </div>
         <div class="outfit-section" data-part="acc">
@@ -539,6 +355,7 @@
     <button class="btn-secondary" onclick="prevStep(3)">← Назад</button>
   </div>
 
+  <!-- STEP 4: Vibe + note -->
   <div class="quiz-step" id="step4">
     <p class="step-question">Какое настроение свидания?</p>
     <p class="step-hint">Это поможет мне всё организовать</p>
@@ -556,9 +373,10 @@
   </div>
 </section>
 
+<!-- FINAL -->
 <section id="final">
   <span class="final-heart">💌</span>
-  <h2 class="final-title">Спасибо, любимая Даяна</h2>
+  <h2 class="final-title">Спасибо, любимая</h2>
   <p style="color:var(--text-muted); font-size:15px; font-weight:300; max-width:360px; text-align:center; line-height:1.7;">
     Я прочитаю каждый твой ответ и постараюсь сделать всё идеально. Обещаю.
   </p>
@@ -567,72 +385,9 @@
 
 <script>
 // ===== CONFIG =====
+// Вставь сюда свой токен бота и chat_id после получения
 const TG_TOKEN = '8998801531:AAG9sIM_H4-0DhunUh4b-3jejZLEnvDu538';
 const TG_CHAT_ID = '774063962';
-
-// ===== LIGHTBOX FUNCTIONS =====
-const lightbox = document.getElementById('lightboxModal');
-const lightboxContainer = document.getElementById('lightboxMediaContainer');
-const lightboxClose = document.getElementById('lightboxClose');
-
-function openLightbox(src, type) {
-  lightboxContainer.innerHTML = '';
-  
-  if (type === 'image') {
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = 'Memory';
-    lightboxContainer.appendChild(img);
-  } else if (type === 'video') {
-    const video = document.createElement('video');
-    video.src = src;
-    video.controls = true;
-    video.autoplay = true;
-    lightboxContainer.appendChild(video);
-  }
-  
-  lightbox.classList.add('show');
-  document.body.style.overflow = 'hidden'; 
-}
-
-function closeLightbox() {
-  lightbox.classList.remove('show');
-  lightboxContainer.innerHTML = ''; 
-  document.body.style.overflow = 'auto'; 
-}
-
-lightboxClose.addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) {
-    closeLightbox();
-  }
-});
-
-// ===== HERO SLIDER =====
-const heroImages = [
-  '2026-05-30 21.12.11.jpg',
-  '2026-05-30 21.12.28.jpg',
-  '2026-05-30 21.13.05.jpg'
-];
-const sliderContainer = document.getElementById('heroSlider');
-
-heroImages.forEach((imgSrc, index) => {
-  const slide = document.createElement('div');
-  slide.className = 'hero-slide';
-  slide.style.backgroundImage = `url("${imgSrc}")`;
-  if (index === 0) slide.classList.add('active');
-  sliderContainer.appendChild(slide);
-});
-
-let currentSlide = 0;
-setInterval(() => {
-  const slides = document.querySelectorAll('.hero-slide');
-  if (slides.length > 0) {
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
-  }
-}, 5000);
 
 // ===== PETALS =====
 const pc = document.getElementById('petalsContainer');
@@ -646,7 +401,7 @@ for (let i = 0; i < 18; i++) {
 // ===== STATE =====
 const answers = {
   food: [], date: null, time: null,
-  top: 'Белую футболку', bottom: 'Чёрные джинсы', shoes: 'Белые кеды', watch: true,
+  top: 'Белая футболка', bottom: 'Чёрные джинсы', shoes: 'Белые кеды', watch: true,
   vibe: null, note: ''
 };
 
@@ -704,31 +459,35 @@ document.querySelectorAll('.time-slot').forEach(s => {
   s.addEventListener('click', () => { document.querySelectorAll('.time-slot').forEach(x => x.classList.remove('selected')); s.classList.add('selected'); answers.time = s.dataset.val; });
 });
 
-// ===== OUTFIT LOGIC =====
+// ===== OUTFIT =====
 function selectBtns(section, clickedBtn) {
   section.querySelectorAll('.outfit-btn').forEach(b => b.classList.remove('selected'));
   clickedBtn.classList.add('selected');
-  updateOutfitLabel();
 }
-function updateOutfitLabel() {
-  const label = document.getElementById('guyOutfitLabel');
-  label.textContent = `Выбрано: ${answers.top} + ${answers.bottom} (${answers.shoes})${answers.watch ? ' + ⌚' : ''}`;
-}
-function setTop(name, event) {
+function setTop(name, color) {
   answers.top = name;
-  selectBtns(event.target.closest('.outfit-section'), event.target);
+  document.getElementById('figShirt').setAttribute('fill', color);
+  const sec = event.target.closest('.outfit-section');
+  selectBtns(sec, event.target);
 }
-function setBottom(name, event) {
+function setBottom(name, color) {
   answers.bottom = name;
-  selectBtns(event.target.closest('.outfit-section'), event.target);
+  document.getElementById('figBottom').setAttribute('fill', color);
+  const sec = event.target.closest('.outfit-section');
+  selectBtns(sec, event.target);
 }
-function setShoes(name, event) {
+function setShoes(name, color) {
   answers.shoes = name;
-  selectBtns(event.target.closest('.outfit-section'), event.target);
+  document.getElementById('figShoeL').setAttribute('fill', color);
+  document.getElementById('figShoeR').setAttribute('fill', color);
+  const sec = event.target.closest('.outfit-section');
+  selectBtns(sec, event.target);
 }
-function setWatch(val, event) {
+function setWatch(val, e) {
   answers.watch = val;
-  selectBtns(event.target.closest('.outfit-section'), event.target);
+  document.getElementById('figWatch').setAttribute('opacity', val ? '1' : '0');
+  const sec = e.target.closest('.outfit-section');
+  selectBtns(sec, e.target);
 }
 
 // ===== MEME =====
@@ -740,10 +499,10 @@ document.querySelectorAll('.vibe-card').forEach(c => {
   c.addEventListener('click', () => { document.querySelectorAll('.vibe-card').forEach(x => x.classList.remove('selected')); c.classList.add('selected'); answers.vibe = c.dataset.val; });
 });
 
-// ===== LABELS =====
+// ===== FOOD LABELS =====
 const foodLabels = {
   'tom-yam':'Том Ям 🍜','rolls':'Роллы 🍱','sushi':'Суши 🍣','ramen':'Рамен 🍝','pad-thai':'Пад Тай 🥢',
-  'bubble-tea':'Бабл Ти 🧋','pizza':'Пицца 🍕','pasta':'Паста 🍝','risotto':'Ризотто 𫄗',
+  'bubble-tea':'Бабл Ти 🧋','pizza':'Пицца 🍕','pasta':'Паста 🍝','risotto':'Ризотто 🫕',
   'macarons':'Макарони 🫐','bruschetta':'Брускетта 🥖','burger':'Бургер 🍔',
   'shashlyk':'Шашлык 🥩','steak':'Стейк 🥓','ribs':'Рёбрышки 🍖',
   'tiramisu':'Тирамису ☕','cheesecake':'Чизкейк 🍰','chocolate-cake':'Шоколадный торт 🎂',
@@ -753,6 +512,7 @@ const vibeLabels = {romantic:'Романтично 🕯️',fun:'Весело �
 
 // ===== TELEGRAM =====
 async function sendToTelegram(text) {
+  if (TG_TOKEN === 'ВСТАВЬ_ТОКЕН_ЗДЕСЬ') return false;
   try {
     const r = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
       method:'POST', headers:{'Content-Type':'application/json'},
@@ -783,7 +543,6 @@ async function finish() {
 
   const sent = await sendToTelegram(msg);
   if (sent) status.textContent = '✓ Ответы отправлены!';
-  else status.textContent = 'Ошибка отправки, но ответы сохранены ниже.';
 
   document.getElementById('quiz').style.display = 'none';
   const final = document.getElementById('final');
@@ -799,6 +558,73 @@ async function finish() {
   `;
   final.scrollIntoView({behavior:'smooth'});
 }
+
+// ===== GALLERY =====
+const photos = [
+  '2026-05-30%2021.12.11.jpg',
+  '2026-05-30%2021.12.28.jpg',
+  '2026-05-30%2021.13.05.jpg',
+  '2026-05-30%2021.13.25.jpg',
+  '2026-05-30%2021.24.27.jpg',
+  '2026-05-30%2021.26.24.jpg',
+  '2026-05-30%2021.36.02.jpg',
+  '2026-05-30%2021.36.08.jpg',
+  '2026-05-30%2021.36.17.jpg',
+  '2026-05-30%2021.36.23.jpg',
+  '2026-05-30%2021.36.30.jpg',
+  '2026-05-30%2021.36.36.jpg',
+  '2026-05-30%2021.36.41.jpg',
+  '2026-05-30%2021.36.49.jpg',
+  '2026-05-30%2021.36.57.jpg',
+  '2026-05-30%2021.37.07.jpg',
+  '2026-05-30%2021.37.12.jpg',
+  '2026-05-30%2021.37.18.jpg',
+  '2026-05-30%2021.37.24.jpg',
+  'ccdr%202025-11-12%20180907.546.JPG',
+  'dclassic%202025-11-12%20181542.363.JPG',
+  'IMG_4431.JPG'
+];
+
+const grid = document.getElementById('galleryGrid');
+let lbIndex = 0;
+photos.forEach((src, i) => {
+  const div = document.createElement('div');
+  div.className = 'gallery-item fade-in';
+  div.style.transitionDelay = (i * 0.05) + 's';
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = 'Наш момент';
+  img.loading = 'lazy';
+  img.onerror = () => { div.style.display = 'none'; };
+  div.appendChild(img);
+  div.addEventListener('click', () => openLb(i));
+  grid.appendChild(div);
+});
+
+function openLb(i) {
+  lbIndex = i;
+  document.getElementById('lbImg').src = photos[i];
+  document.getElementById('lightbox').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  document.getElementById('lightbox').classList.remove('show');
+  document.body.style.overflow = '';
+}
+function lbNav(dir) {
+  lbIndex = (lbIndex + dir + photos.length) % photos.length;
+  document.getElementById('lbImg').src = photos[lbIndex];
+}
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLb();
+});
+
+// ===== SCROLL FADE =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
 </script>
 </body>
 </html>
