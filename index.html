@@ -48,14 +48,117 @@
   .letter-sig { margin-top: 32px; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-style: italic; color: var(--rose-dark); text-align: right; }
   .letter-decoration { text-align: center; margin: 20px 0; color: var(--blush); letter-spacing: 12px; font-size: 14px; }
   
-  /* POLAROID MEMORIES GALLERY */
-  #gallery { background: var(--warm); }
-  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; max-width: 1100px; width: 100%; padding: 20px; }
-  .polaroid { background: white; padding: 16px 16px 24px 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); transform: rotate(var(--r)); transition: all 0.3s ease; position: relative; display: flex; flex-direction: column; align-items: center; }
-  .polaroid::before { content: ''; position: absolute; top: -12px; left: 35%; width: 30%; height: 24px; background: rgba(245,221,224,0.6); transform: rotate(-2deg); box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
-  .polaroid:hover { transform: scale(1.04) rotate(0deg); z-index: 5; box-shadow: 0 15px 35px rgba(139,60,68,0.12); }
-  .polaroid img, .polaroid video { width: 100%; height: 250px; object-fit: cover; border: 1px solid #eee; background: #fafaf8; }
-  .polaroid-caption { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; margin-top: 16px; color: var(--text-muted); text-align: center; }
+  /* CHAOTIC ORGANIC GALLERY */
+  #gallery { background: var(--warm); padding: 100px 16px; overflow: hidden; }
+  .gallery-container { max-width: 1200px; width: 100%; margin: 0 auto; }
+  
+  /* Асимметричная сетка */
+  .gallery-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 32px; 
+    align-items: center;
+  }
+  
+  .gallery-card {
+    position: relative;
+    background: #ffffff;
+    padding: 12px 12px 12px 12px;
+    border-radius: 8px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.06);
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    z-index: 1;
+  }
+  
+  /* Прикольный эффект хаотичного разброса по умолчанию */
+  .gallery-card.tilt-left { transform: rotate(-3deg) translateY(5px); }
+  .gallery-card.tilt-right { transform: rotate(3deg) translateY(-8px); }
+  .gallery-card.tilt-slight-left { transform: rotate(-1.5deg) translateY(-2px); }
+  .gallery-card.tilt-slight-right { transform: rotate(1.5deg) translateY(6px); }
+  
+  /* При наведении фото мягко выравнивается и увеличивается */
+  .gallery-card:hover {
+    transform: scale(1.06) rotate(0deg) translateY(-10px) !important;
+    box-shadow: 0 22px 45px rgba(139,60,68,0.18);
+    z-index: 10;
+  }
+  
+  .gallery-card img, .gallery-card video {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+  }
+
+  /* Иконка видео */
+  .video-badge {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+    color: var(--text);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* LIGHTBOX MODAL */
+  .lightbox-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 18, 19, 0.98);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .lightbox-modal.show {
+    display: flex;
+    opacity: 1;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 36px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .lightbox-close:hover {
+    transform: scale(1.1);
+  }
+  .lightbox-media-container {
+    max-width: 90%;
+    max-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .lightbox-media-container img,
+  .lightbox-media-container video {
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 8px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    object-fit: contain;
+  }
 
   /* QUIZ & STUFF */
   #quiz { background: var(--cream); padding-top: 100px; }
@@ -162,6 +265,7 @@
 
 <div class="petals-bg" id="petalsContainer"></div>
 
+<!-- MEME MODAL -->
 <div class="meme-overlay" id="memeOverlay">
   <div class="meme-box">
     <span class="meme-emoji-big">🤌😭</span>
@@ -171,9 +275,18 @@
   </div>
 </div>
 
+<!-- LIGHTBOX MODAL -->
+<div class="lightbox-modal" id="lightboxModal">
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <div class="lightbox-media-container" id="lightboxMediaContainer">
+    <!-- Сюда динамически подставляется медиафайл -->
+  </div>
+</div>
+
+<!-- HERO С ФОНОВЫМ СЛАЙДЕРОМ -->
 <section id="hero">
   <div class="hero-bg-slider" id="heroSlider">
-    <!-- Слайды генерируются скриптом ниже для надежности -->
+    <!-- Слайды генерируются скриптом ниже -->
   </div>
   <div class="hero-content">
     <span class="hero-flower">🌸</span>
@@ -186,6 +299,7 @@
   </div>
 </section>
 
+<!-- LETTER С РАЗМЫТЫМ ЗАДНИМ ФОНОМ -->
 <section id="letter">
   <div class="letter-bg-img"></div>
   <div class="letter-card">
@@ -206,40 +320,76 @@
   </a>
 </section>
 
+<!-- CHAOTIC ORGANIC GALLERY (БЕЗ ПОДПИСЕЙ, ЧИСТЫЙ ВИЗУАЛ) -->
 <section id="gallery">
   <p class="section-label">Эстетика воспоминаний</p>
-  <h2 class="section-title">То, чем я дорожу</h2>
+  <h2 class="section-title">Наши моменты</h2>
   
-  <div class="gallery-grid">
-    <!-- Полароид 1 -->
-    <div class="polaroid" style="--r: -3deg;">
-      <img src="2026-05-30 21.13.25.jpg" alt="Момент">
-      <p class="polaroid-caption">Твоя улыбка</p>
-    </div>
-    <!-- Полароид 2 (Видео 1) -->
-    <div class="polaroid" style="--r: 2deg;">
-      <video src="2026-05-30 21.35.53.mp4" autoplay loop muted playsinline></video>
-      <p class="polaroid-caption">Самые живые секунды 💫</p>
-    </div>
-    <!-- Полароид 3 -->
-    <div class="polaroid" style="--r: -1deg;">
-      <img src="2026-05-30 21.24.27.jpg" alt="Момент">
-      <p class="polaroid-caption">Вместе уютнее</p>
-    </div>
-    <!-- Полароид 4 -->
-    <div class="polaroid" style="--r: 4deg;">
-      <img src="2026-05-30 21.26.24.jpg" alt="Момент">
-      <p class="polaroid-caption">Взгляд, который обожаю</p>
-    </div>
-    <!-- Полароид 5 (Видео 2) -->
-    <div class="polaroid" style="--r: -4deg;">
-      <video src="2026-05-30 21.37.03.mp4" autoplay loop muted playsinline></video>
-      <p class="polaroid-caption">Смех и радость 🤍</p>
-    </div>
-    <!-- Полароид 6 -->
-    <div class="polaroid" style="--r: 3deg;">
-      <img src="IMG_4431.JPG" alt="Момент">
-      <p class="polaroid-caption">Моя бесконечная нежность</p>
+  <div class="gallery-container">
+    <div class="gallery-grid">
+      
+      <!-- Фото 1 -->
+      <div class="gallery-card tilt-left" onclick="openLightbox('2026-05-30 21.13.25.jpg', 'image')">
+        <img src="2026-05-30 21.13.25.jpg" alt="Момент">
+      </div>
+      
+      <!-- Видео 1 -->
+      <div class="gallery-card tilt-right" onclick="openLightbox('2026-05-30 21.35.53.mp4', 'video')">
+        <div class="video-badge">▶</div>
+        <video src="2026-05-30 21.35.53.mp4" loop muted playsinline autoplay></video>
+      </div>
+      
+      <!-- Фото 2 -->
+      <div class="gallery-card tilt-slight-left" onclick="openLightbox('2026-05-30 21.24.27.jpg', 'image')">
+        <img src="2026-05-30 21.24.27.jpg" alt="Момент">
+      </div>
+      
+      <!-- Фото 3 -->
+      <div class="gallery-card tilt-slight-right" onclick="openLightbox('2026-05-30 21.26.24.jpg', 'image')">
+        <img src="2026-05-30 21.26.24.jpg" alt="Момент">
+      </div>
+      
+      <!-- Видео 2 -->
+      <div class="gallery-card tilt-left" onclick="openLightbox('2026-05-30 21.37.03.mp4', 'video')">
+        <div class="video-badge">▶</div>
+        <video src="2026-05-30 21.37.03.mp4" loop muted playsinline autoplay></video>
+      </div>
+      
+      <!-- Фото 4 -->
+      <div class="gallery-card tilt-right" onclick="openLightbox('IMG_4431.JPG', 'image')">
+        <img src="IMG_4431.JPG" alt="Момент">
+      </div>
+
+      <!-- Фото 5 -->
+      <div class="gallery-card tilt-slight-left" onclick="openLightbox('2026-05-30 21.36.02.jpg', 'image')">
+        <img src="2026-05-30 21.36.02.jpg" alt="Момент">
+      </div>
+
+      <!-- Фото 6 -->
+      <div class="gallery-card tilt-slight-right" onclick="openLightbox('2026-05-30 21.36.36.jpg', 'image')">
+        <img src="2026-05-30 21.36.36.jpg" alt="Момент">
+      </div>
+
+      <!-- Фото 7 -->
+      <div class="gallery-card tilt-left" onclick="openLightbox('2026-05-30 21.36.08.jpg', 'image')">
+        <img src="2026-05-30 21.36.08.jpg" alt="Момент">
+      </div>
+
+      <!-- Фото 8 -->
+      <div class="gallery-card tilt-right" onclick="openLightbox('2026-05-30 21.36.17.jpg', 'image')">
+        <img src="2026-05-30 21.36.17.jpg" alt="Момент">
+      </div>
+
+      <!-- Фото 9 -->
+      <div class="gallery-card tilt-slight-left" onclick="openLightbox('2026-05-30 21.36.23.jpg', 'image')">
+        <img src="2026-05-30 21.36.23.jpg" alt="Момент">
+      </div>
+
+      <!-- Фото 10 -->
+      <div class="gallery-card tilt-slight-right" onclick="openLightbox('2026-05-30 21.36.30.jpg', 'image')">
+        <img src="2026-05-30 21.36.30.jpg" alt="Момент">
+      </div>
+
     </div>
   </div>
 
@@ -248,6 +398,7 @@
   </a>
 </section>
 
+<!-- QUIZ -->
 <section id="quiz">
   <p class="section-label">Планировщик свидания</p>
   <h2 class="section-title">Расскажи, как ты хочешь</h2>
@@ -419,6 +570,44 @@
 const TG_TOKEN = '8998801531:AAG9sIM_H4-0DhunUh4b-3jejZLEnvDu538';
 const TG_CHAT_ID = '774063962';
 
+// ===== LIGHTBOX FUNCTIONS =====
+const lightbox = document.getElementById('lightboxModal');
+const lightboxContainer = document.getElementById('lightboxMediaContainer');
+const lightboxClose = document.getElementById('lightboxClose');
+
+function openLightbox(src, type) {
+  lightboxContainer.innerHTML = '';
+  
+  if (type === 'image') {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'Memory';
+    lightboxContainer.appendChild(img);
+  } else if (type === 'video') {
+    const video = document.createElement('video');
+    video.src = src;
+    video.controls = true;
+    video.autoplay = true;
+    lightboxContainer.appendChild(video);
+  }
+  
+  lightbox.classList.add('show');
+  document.body.style.overflow = 'hidden'; 
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('show');
+  lightboxContainer.innerHTML = ''; 
+  document.body.style.overflow = 'auto'; 
+}
+
+lightboxClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    closeLightbox();
+  }
+});
+
 // ===== HERO SLIDER =====
 const heroImages = [
   '2026-05-30 21.12.11.jpg',
@@ -554,7 +743,7 @@ document.querySelectorAll('.vibe-card').forEach(c => {
 // ===== LABELS =====
 const foodLabels = {
   'tom-yam':'Том Ям 🍜','rolls':'Роллы 🍱','sushi':'Суши 🍣','ramen':'Рамен 🍝','pad-thai':'Пад Тай 🥢',
-  'bubble-tea':'Бабл Ти 🧋','pizza':'Пицца 🍕','pasta':'Паста 🍝','risotto':'Ризотто 🫕',
+  'bubble-tea':'Бабл Ти 🧋','pizza':'Пицца 🍕','pasta':'Паста 🍝','risotto':'Ризотто 𫄗',
   'macarons':'Макарони 🫐','bruschetta':'Брускетта 🥖','burger':'Бургер 🍔',
   'shashlyk':'Шашлык 🥩','steak':'Стейк 🥓','ribs':'Рёбрышки 🍖',
   'tiramisu':'Тирамису ☕','cheesecake':'Чизкейк 🍰','chocolate-cake':'Шоколадный торт 🎂',
